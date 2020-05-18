@@ -1,7 +1,7 @@
 const test = require('node-cmake')('NanWeakFunctionTest');
 
 const obj = new test.TestObject();
-
+let callbackID = 0;
 function runTest()
 {
     let testFunc = function(num)
@@ -10,7 +10,7 @@ function runTest()
     }
     for (let x = 0; x < 10000; x++)
     {
-        const cbID = 'callback' + x;
+        const cbID = 'callback' + callbackID++;
         obj.createCallback(cbID, testFunc);
     }
     testFunc = undefined;
